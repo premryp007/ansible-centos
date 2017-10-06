@@ -1,0 +1,14 @@
+---
+- name: setup the centos server
+  hosts: docker_centos
+
+  vars:
+   - domainname: marimuthu.localhost
+   - httpd_port: 80
+   - localip: 127.0.0.1
+   - mysql_root_password: ahsan123
+   - mysql_port: 3306
+  roles:
+#   - misc
+#   - apache
+   - mysql

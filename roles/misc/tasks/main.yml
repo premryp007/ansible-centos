@@ -1,0 +1,10 @@
+---
+# tasks file for misc
+- name: yum update
+  yum: name=* state=latest
+
+- name: install depes
+  yum: name={{ item }} state=present
+  with_items:
+    - curl
+    - wget

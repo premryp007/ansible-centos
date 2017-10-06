@@ -1,0 +1,25 @@
+---
+# tasks file for apache
+- name: install apache
+  yum: name=httpd state=present
+
+- name: copy index file
+  template: src=index.html dest=/var/www/html
+
+- name: copy virtualhost
+  template: src=marimuthu.conf dest=/etc/httpd/conf.d/
+
+#- name: Edit host file
+#  lineinfile: dest=/etc/hosts backup=yes state=present insertafter="^ff02::2" line={{ localip }} {{ domainname }}
+#   lineinfile: dest=/etc/hosts insertafter="^ff02::2" line={{ localip }} {{ domainname }}
+#  with_items:
+#    - {{ localip }} {{ domainname }}
+
+- name: create directory
+  file: path=/var/www/{{ domainname }} state=directory
+
+- name: copy index file
+  template: src=index.html dest=/var/www/{{ domainname }}/
+
+- name: start the apache
+  service: name=httpd state=started
